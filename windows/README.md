@@ -161,12 +161,18 @@ Si aprirà una finestra blu/nera con del testo. Questo è il terminale PowerShel
    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
    ```
 
-3. Lo script farà queste cose in automatico:
+3. **Scegli la lingua**: lo script ti chiederà in quale lingua vuoi i nomi delle cartelle.
+   Le opzioni sono: Italiano, English, Español, Français, Deutsch, Português.
+   Premi il numero corrispondente e poi Invio. Se non scegli nulla, sarà Italiano.
+
+4. Lo script farà queste cose in automatico:
    - Copia il programma nella cartella `C:\Users\TUONOME\Scripts\`
+   - Copia i file di lingua in `C:\Users\TUONOME\Scripts\lang\`
+   - Se rileva cartelle esistenti in un'altra lingua, ti chiede se vuoi rinominarle
    - Fa un primo test di funzionamento
    - Ti chiede: **"Vuoi configurare l'esecuzione automatica ogni 3 ore?"**
 
-4. **Rispondi `s`** e premi Invio per attivare l'esecuzione automatica.
+5. **Rispondi `s`** e premi Invio per attivare l'esecuzione automatica.
 
 Se tutto è andato bene, vedrai: `Installazione completata!`
 
@@ -350,6 +356,9 @@ Sì. Apri PowerShell come Amministratore e digita uno di questi comandi:
 **I download in corso vengono toccati?**
 No. I file con estensione `.tmp`, `.crdownload` o `.part` (download non completati) vengono ignorati.
 
+**Come cambio lingua dopo l'installazione?**
+Riesegui `.\Install-Windows.ps1` dalla cartella originale e scegli una nuova lingua. Lo script rileva le cartelle esistenti nella lingua precedente e ti chiede se vuoi rinominarle automaticamente.
+
 ---
 
 ## Contenuto della cartella
@@ -358,5 +367,6 @@ No. I file con estensione `.tmp`, `.crdownload` o `.part` (download non completa
 |------|-------------|
 | `Organize-Downloads.ps1` | Lo script principale che organizza i file |
 | `Install-Windows.ps1` | Lo script di installazione (da eseguire una sola volta) |
+| `lang\it.ps1` ... `lang\pt.ps1` | File di lingua (6 lingue supportate) |
 | `README.md` | Questa guida |
 

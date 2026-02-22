@@ -79,11 +79,13 @@ Le cartelle sono numerate (`001__`, `002__`, ecc.) per apparire sempre nello ste
 
 ## Caratteristiche principali
 
+- **Supporto multi-lingua**: i nomi delle cartelle, i messaggi e le keyword di riconoscimento si adattano alla lingua scelta durante l'installazione (Italiano, English, Español, Français, Deutsch, Português)
 - **Nessun file viene sovrascritto**: se esiste già un file con lo stesso nome, viene aggiunto un suffisso numerico (`documento_1.pdf`, `documento_2.pdf`, ecc.)
 - **I download in corso non vengono toccati**: i file `.part`, `.crdownload` e `.download` vengono ignorati
-- **Documenti di lavoro riconosciuti automaticamente**: fatture, contratti e preventivi vengono identificati dal nome del file e smistati in `007__Lavoro/`
+- **Documenti di lavoro riconosciuti automaticamente**: fatture, contratti e preventivi vengono identificati dal nome del file e smistati in `007__Lavoro/` (le keyword cambiano in base alla lingua scelta)
 - **Modalità test (DRY RUN)**: è possibile vedere cosa farebbe lo script senza spostare nulla
 - **Log dettagliato**: ogni operazione viene registrata in un file di log per consultazione
+- **Migrazione cartelle**: se cambi lingua reinstallando, le cartelle esistenti vengono rinominate automaticamente
 
 ---
 
@@ -104,9 +106,23 @@ Ogni cartella contiene gli script e una guida passo passo pensata per utenti non
 1. **Scarica** i file della cartella corrispondente al tuo sistema operativo
 2. **Apri la guida** (`README.md`) dentro quella cartella e segui le istruzioni passo passo
 3. **Lancia lo script di installazione** (`install.sh` su Linux/macOS, `Install-Windows.ps1` su Windows)
-4. **Conferma** l'attivazione automatica quando richiesto
+4. **Scegli la lingua** quando richiesto (Italiano, English, Español, Français, Deutsch, Português)
+5. **Conferma** l'attivazione automatica quando richiesto
 
 L'installazione richiede pochi minuti. Dopo, lo script gira da solo in background senza bisogno di ulteriori interventi.
+
+### Lingue supportate
+
+| Codice | Lingua | Esempio cartella |
+|--------|--------|-----------------|
+| `it` | Italiano (default) | `001__Recenti/Oggi` |
+| `en` | English | `001__Recent/Today` |
+| `es` | Español | `001__Recientes/Hoy` |
+| `fr` | Français | `001__Recents/Aujourd-hui` |
+| `de` | Deutsch | `001__Neueste/Heute` |
+| `pt` | Português | `001__Recentes/Hoje` |
+
+Per cambiare lingua dopo l'installazione, basta rieseguire lo script di installazione e scegliere una nuova lingua. Le cartelle esistenti vengono rinominate automaticamente.
 
 ---
 
@@ -167,13 +183,16 @@ download_organizer/
 ├── linux/
 │   ├── organize_downloads.sh        ← script principale (bash)
 │   ├── install.sh                   ← installazione automatica
+│   ├── lang/                        ← file di lingua (it, en, es, fr, de, pt)
 │   └── README.md                    ← guida passo passo per Linux
 ├── macOS/
 │   ├── organize_downloads.sh        ← script principale (bash)
 │   ├── install.sh                   ← installazione automatica
+│   ├── lang/                        ← file di lingua (it, en, es, fr, de, pt)
 │   └── README.md                    ← guida passo passo per macOS
 └── windows/
     ├── Organize-Downloads.ps1       ← script principale (PowerShell)
     ├── Install-Windows.ps1          ← installazione automatica
+    ├── lang/                        ← file di lingua (it, en, es, fr, de, pt)
     └── README.md                    ← guida passo passo per Windows
 ```

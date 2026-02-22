@@ -143,13 +143,19 @@ Si aprirà una finestra con del testo. Questo è il terminale.
 
    **Se compare un errore** tipo "Operation not permitted", vedi la sezione "Permessi macOS" più avanti.
 
-4. Lo script farà queste cose in automatico:
+4. **Scegli la lingua**: lo script ti chiederà in quale lingua vuoi i nomi delle cartelle.
+   Le opzioni sono: Italiano, English, Español, Français, Deutsch, Português.
+   Premi il numero corrispondente e poi Invio. Se non scegli nulla, sarà Italiano.
+
+5. Lo script farà queste cose in automatico:
    - Copia il programma nella cartella `~/.local/bin/`
+   - Copia i file di lingua in `~/.local/share/download_organizer/lang/`
    - Aggiunge la cartella al PATH (se necessario)
+   - Se rileva cartelle esistenti in un'altra lingua, ti chiede se vuoi rinominarle
    - Fa un primo test di funzionamento
    - Ti chiede: **"Vuoi che io configuri il cron job automaticamente?"**
 
-5. **Rispondi `s`** e premi Invio per attivare l'esecuzione automatica ogni 3 ore.
+6. **Rispondi `s`** e premi Invio per attivare l'esecuzione automatica ogni 3 ore.
 
 Se tutto è andato bene, vedrai: `Installazione completata!`
 
@@ -350,6 +356,9 @@ No. I file con estensione `.part`, `.crdownload` o `.download` (download non com
 **Devo tenere il Terminale aperto?**
 No. Il cron job gira in background indipendentemente dal Terminale. Una volta configurato, puoi chiudere il Terminale.
 
+**Come cambio lingua dopo l'installazione?**
+Riesegui `./install.sh` dalla cartella originale e scegli una nuova lingua. Lo script rileva le cartelle esistenti nella lingua precedente e ti chiede se vuoi rinominarle automaticamente.
+
 ---
 
 ## Contenuto della cartella
@@ -358,5 +367,6 @@ No. Il cron job gira in background indipendentemente dal Terminale. Una volta co
 |------|-------------|
 | `organize_downloads.sh` | Lo script principale che organizza i file |
 | `install.sh` | Lo script di installazione (da eseguire una sola volta) |
+| `lang/it.sh` ... `lang/pt.sh` | File di lingua (6 lingue supportate) |
 | `README.md` | Questa guida |
 

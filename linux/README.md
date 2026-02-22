@@ -160,12 +160,18 @@ Questo è l'unico passaggio che richiede una modifica manuale.
    ./install.sh
    ```
 
-5. Lo script farà queste cose in automatico:
+5. **Scegli la lingua**: lo script ti chiederà in quale lingua vuoi i nomi delle cartelle.
+   Le opzioni sono: Italiano, English, Español, Français, Deutsch, Português.
+   Premi il numero corrispondente e poi Invio. Se non scegli nulla, sarà Italiano.
+
+6. Lo script farà queste cose in automatico:
    - Copia il programma nella cartella giusta del sistema (`~/.local/bin/`)
+   - Copia i file di lingua in `~/.local/share/download_organizer/lang/`
+   - Se rileva cartelle esistenti in un'altra lingua, ti chiede se vuoi rinominarle
    - Fa un primo test di funzionamento
    - Ti chiede: **"Vuoi che io configuri il cron job automaticamente?"**
 
-6. **Rispondi `s`** (e premi Invio) per attivare l'esecuzione automatica ogni 3 ore.
+7. **Rispondi `s`** (e premi Invio) per attivare l'esecuzione automatica ogni 3 ore.
 
 Se tutto è andato bene, vedrai il messaggio: `Installazione completata!`
 
@@ -339,6 +345,9 @@ Sì. Apri `crontab -e` e modifica la riga. Alcuni esempi:
 **I download in corso vengono toccati?**
 No. I file con estensione `.part` o `.crdownload` (download non completati) vengono ignorati.
 
+**Come cambio lingua dopo l'installazione?**
+Riesegui `./install.sh` dalla cartella originale e scegli una nuova lingua. Lo script rileva le cartelle esistenti nella lingua precedente e ti chiede se vuoi rinominarle automaticamente.
+
 ---
 
 ## Contenuto della cartella
@@ -347,4 +356,5 @@ No. I file con estensione `.part` o `.crdownload` (download non completati) veng
 |------|-------------|
 | `organize_downloads.sh` | Lo script principale che organizza i file |
 | `install.sh` | Lo script di installazione (da eseguire una sola volta) |
+| `lang/it.sh` ... `lang/pt.sh` | File di lingua (6 lingue supportate) |
 | `README.md` | Questa guida |
