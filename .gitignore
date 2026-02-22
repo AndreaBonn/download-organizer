@@ -1,0 +1,28 @@
+# Log
+*.log
+.download_organizer.log
+
+# Claude Code
+.claude/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+.directory
+
+# Editor e IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+.*.kate-swp
