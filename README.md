@@ -177,14 +177,3 @@ download_organizer/
     ├── Install-Windows.ps1          ← installazione automatica
     └── README.md                    ← guida passo passo per Windows
 ```
-
----
-
-## Licenza
-
-Questo progetto è rilasciato come software libero. Puoi usarlo, modificarlo e distribuirlo liberamente.
-
----
-
-Versione: 1.2
-Data: Febbraio 2026
