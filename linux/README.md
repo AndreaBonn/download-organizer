@@ -1,3 +1,7 @@
+**🇮🇹 [Italiano](README.md) | 🇬🇧 [English](README.en.md)**
+
+---
+
 # Download Organizer per Linux
 
 Organizzatore automatico della cartella Scaricati (o Download) per sistemi Linux.
@@ -357,4 +361,5 @@ Riesegui `./install.sh` dalla cartella originale e scegli una nuova lingua. Lo s
 | `organize_downloads.sh` | Lo script principale che organizza i file |
 | `install.sh` | Lo script di installazione (da eseguire una sola volta) |
 | `lang/it.sh` ... `lang/pt.sh` | File di lingua (6 lingue supportate) |
-| `README.md` | Questa guida |
+| `README.md` | Questa guida (italiano) |
+| `README.en.md` | Questa guida (inglese) |

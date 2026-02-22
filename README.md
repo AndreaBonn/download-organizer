@@ -1,3 +1,7 @@
+**🇮🇹 [Italiano](README.md) | 🇬🇧 [English](README.en.md)**
+
+---
+
 # Download Organizer
 
 Organizzatore automatico della cartella Download per **Linux**, **macOS** e **Windows**.
@@ -178,21 +182,25 @@ Sì. Ogni versione è indipendente e può essere installata separatamente su cia
 
 ```
 download_organizer/
-├── README.md                        ← questa guida generale
+├── README.md                        ← questa guida generale (italiano)
+├── README.en.md                     ← questa guida generale (inglese)
 ├── .gitignore
 ├── linux/
 │   ├── organize_downloads.sh        ← script principale (bash)
 │   ├── install.sh                   ← installazione automatica
 │   ├── lang/                        ← file di lingua (it, en, es, fr, de, pt)
-│   └── README.md                    ← guida passo passo per Linux
+│   ├── README.md                    ← guida passo passo per Linux (italiano)
+│   └── README.en.md                 ← guida passo passo per Linux (inglese)
 ├── macOS/
 │   ├── organize_downloads.sh        ← script principale (bash)
 │   ├── install.sh                   ← installazione automatica
 │   ├── lang/                        ← file di lingua (it, en, es, fr, de, pt)
-│   └── README.md                    ← guida passo passo per macOS
+│   ├── README.md                    ← guida passo passo per macOS (italiano)
+│   └── README.en.md                 ← guida passo passo per macOS (inglese)
 └── windows/
     ├── Organize-Downloads.ps1       ← script principale (PowerShell)
     ├── Install-Windows.ps1          ← installazione automatica
     ├── lang/                        ← file di lingua (it, en, es, fr, de, pt)
-    └── README.md                    ← guida passo passo per Windows
+    ├── README.md                    ← guida passo passo per Windows (italiano)
+    └── README.en.md                 ← guida passo passo per Windows (inglese)
 ```

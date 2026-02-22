@@ -1,3 +1,7 @@
+**🇮🇹 [Italiano](README.md) | 🇬🇧 [English](README.en.md)**
+
+---
+
 # Download Organizer per Windows
 
 Organizzatore automatico della cartella Download per sistemi Windows.
@@ -368,5 +372,6 @@ Riesegui `.\Install-Windows.ps1` dalla cartella originale e scegli una nuova lin
 | `Organize-Downloads.ps1` | Lo script principale che organizza i file |
 | `Install-Windows.ps1` | Lo script di installazione (da eseguire una sola volta) |
 | `lang\it.ps1` ... `lang\pt.ps1` | File di lingua (6 lingue supportate) |
-| `README.md` | Questa guida |
+| `README.md` | Questa guida (italiano) |
+| `README.en.md` | Questa guida (inglese) |
 
