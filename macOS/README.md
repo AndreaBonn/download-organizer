@@ -1,377 +1,376 @@
-**🇮🇹 [Italiano](README.md) | 🇬🇧 [English](README.en.md)**
+**🇬🇧 [English](README.md) | 🇮🇹 [Italiano](README.it.md)**
 
 ---
 
-# Download Organizer per macOS
+# Download Organizer for macOS
 
-Organizzatore automatico della cartella Download per macOS.
-Lo script gira in background ogni 3 ore e ordina i file scaricati in sottocartelle organizzate per tipo, senza bisogno di intervento manuale.
+Automatic organizer for the Downloads folder on macOS.
+The script runs in the background every 3 hours and sorts downloaded files into organized subfolders by type, with no manual intervention needed.
 
 ---
 
-## Cosa fa
+## What it does
 
-Ogni volta che lo script si attiva (ogni 3 ore), esegue queste operazioni:
+Every time the script runs (every 3 hours), it performs these operations:
 
-1. **Prende i nuovi file** dalla cartella Download e li mette in `001__Recenti/Oggi/`
-2. **Sposta i file vecchi di 1 giorno** da `Oggi/` a `Questa-Settimana/`
-3. **Dopo 7 giorni**, li smista automaticamente nella cartella giusta in base al tipo (PDF, immagini, video, ecc.)
-4. **Elimina i file sconosciuti** rimasti in `008__Temporaneo/` da oltre 30 giorni
+1. **Takes new files** from the Downloads folder and puts them in `001__Recent/Today/`
+2. **Moves files older than 1 day** from `Today/` to `This-Week/`
+3. **After 7 days**, automatically sorts them into the right folder based on type (PDF, images, video, etc.)
+4. **Deletes unknown files** left in `008__Temporary/` for over 30 days
 
-In pratica: hai 7 giorni per trovare i file recenti nella cartella `001__Recenti/`, poi vengono archiviati automaticamente.
+In practice: you have 7 days to find recent files in `001__Recent/`, then they are automatically archived.
 
-### Struttura delle cartelle
+### Folder structure
 
-Dopo l'installazione, la tua cartella Download apparirà così:
+After installation, your Downloads folder will look like this:
 
 ```
 Downloads/
-├── 001__Recenti/
-│   ├── Oggi/                    ← file scaricati nelle ultime 24 ore
-│   └── Questa-Settimana/        ← file da 1 a 7 giorni
+├── 001__Recent/
+│   ├── Today/                     ← files downloaded in the last 24 hours
+│   └── This-Week/                 ← files from 1 to 7 days old
 │
-├── 002__Dati/
-│   ├── CSV/                     ← .csv, .tsv
-│   ├── Excel/                   ← .xlsx, .xls, .ods
-│   ├── JSON/                    ← .jsonl, .ndjson
-│   ├── Database/                ← .sql, .db, .sqlite
-│   ├── Parquet/                 ← .parquet, .feather, .arrow
-│   └── Altri-Formati/           ← .xml, .avro, .hdf5
+├── 002__Data/
+│   ├── CSV/                       ← .csv, .tsv
+│   ├── Excel/                     ← .xlsx, .xls, .ods
+│   ├── JSON/                      ← .jsonl, .ndjson
+│   ├── Database/                  ← .sql, .db, .sqlite
+│   ├── Parquet/                   ← .parquet, .feather, .arrow
+│   └── Other-Formats/             ← .xml, .avro, .hdf5
 │
-├── 003__Documenti/
-│   ├── PDF/                     ← .pdf
-│   ├── Word/                    ← .doc, .docx, .odt
-│   ├── Presentazioni/           ← .ppt, .pptx, .odp, .key
-│   ├── Testo/                   ← .txt, .md
-│   └── Ebook/                   ← .epub, .mobi
+├── 003__Documents/
+│   ├── PDF/                       ← .pdf
+│   ├── Word/                      ← .doc, .docx, .odt
+│   ├── Presentations/             ← .ppt, .pptx, .odp, .key
+│   ├── Text/                      ← .txt, .md
+│   └── Ebook/                     ← .epub, .mobi
 │
 ├── 004__Media/
-│   ├── Immagini/                ← .jpg, .png, .gif, .svg, .webp, .heic
-│   ├── Video/                   ← .mp4, .avi, .mkv, .mov
-│   ├── Audio/                   ← .mp3, .wav, .flac, .ogg
-│   └── Diagrammi/               ← .drawio, .puml
+│   ├── Images/                    ← .jpg, .png, .gif, .svg, .webp, .heic
+│   ├── Video/                     ← .mp4, .avi, .mkv, .mov
+│   ├── Audio/                     ← .mp3, .wav, .flac, .ogg
+│   └── Diagrams/                  ← .drawio, .puml
 │
-├── 005__Sviluppo/
-│   ├── Codice/                  ← .py, .js, .ts, .swift, .java, .cpp
-│   ├── Notebooks/               ← .ipynb
-│   ├── Config/                  ← .json, .yaml, .toml, .env
-│   ├── Repository/              ← .zip/.tar.gz con nomi tipo "v1.0", "main"
-│   └── Package/                 ← .whl, .gem, .jar
+├── 005__Development/
+│   ├── Code/                      ← .py, .js, .ts, .swift, .java, .cpp
+│   ├── Notebooks/                 ← .ipynb
+│   ├── Config/                    ← .json, .yaml, .toml, .env
+│   ├── Repository/                ← .zip/.tar.gz with names like "v1.0", "main"
+│   └── Package/                   ← .whl, .gem, .jar
 │
 ├── 006__Software/
-│   ├── Installatori/            ← .dmg, .pkg, .app
-│   ├── Archivi/                 ← .zip, .rar, .7z, .tar.gz
-│   ├── Docker/                  ← Dockerfile, docker-compose.yml
-│   └── Scripts/                 ← .sh, .zsh, .command
+│   ├── Installers/                ← .dmg, .pkg, .app
+│   ├── Archives/                  ← .zip, .rar, .7z, .tar.gz
+│   ├── Docker/                    ← Dockerfile, docker-compose.yml
+│   └── Scripts/                   ← .sh, .zsh, .command
 │
-├── 007__Lavoro/
-│   ├── Fatture/                 ← file con "fattura" o "invoice" nel nome
-│   ├── Contratti/               ← file con "contratto" o "contract" nel nome
-│   ├── Preventivi/              ← file con "preventivo" o "quote" nel nome
-│   └── Altri-Documenti/
+├── 007__Work/
+│   ├── Invoices/                  ← files with "invoice" or "receipt" in the name
+│   ├── Contracts/                 ← files with "contract" or "agreement" in the name
+│   ├── Quotes/                    ← files with "quote" or "estimate" in the name
+│   └── Other-Documents/
 │
-└── 008__Temporaneo/             ← file con estensione sconosciuta
-                                    (eliminati automaticamente dopo 30 giorni)
+└── 008__Temporary/                ← files with unknown extension
+                                      (automatically deleted after 30 days)
 ```
 
-Le cartelle sono numerate (`001__`, `002__`, ecc.) per apparire sempre nello stesso ordine nel Finder.
+Folders are numbered (`001__`, `002__`, etc.) to always appear in the same order in Finder.
 
 ---
 
-## Guida all'installazione passo passo
+## Step-by-step installation guide
 
-### Requisiti
+### Requirements
 
-- Un Mac con macOS 10.15 Catalina o successivo
-- Sapere aprire il Terminale (spiegato al Passo 3)
+- A Mac running macOS 10.15 Catalina or later
+- Know how to open the Terminal (explained in Step 3)
 
-### Passo 1: Scopri il nome della tua cartella Download
+### Step 1: Find the name of your Downloads folder
 
-Su macOS la cartella si chiama quasi sempre `Downloads` e si trova in:
+On macOS the folder is almost always called `Downloads` and is located at:
 
 ```
-/Users/TUONOME/Downloads
+/Users/YOURNAME/Downloads
 ```
 
-Per verificare, apri il Finder e guarda nella barra laterale: la cartella "Download" corrisponde alla cartella `Downloads` nel sistema.
+To verify, open Finder and look in the sidebar: the "Downloads" folder corresponds to the `Downloads` folder in the system.
 
-Se hai cambiato la lingua del Mac in italiano, la cartella potrebbe apparire come "Download" nel Finder, ma il suo nome reale nel sistema resta `Downloads`.
+If you changed your Mac language to Italian, the folder may appear as "Download" in Finder, but its real name in the system remains `Downloads`.
 
-**Nella maggior parte dei casi non devi cambiare nulla**: il percorso predefinito `Downloads` è già corretto.
+**In most cases you don't need to change anything**: the default path `Downloads` is already correct.
 
-### Passo 2: Scarica i file
+### Step 2: Download the files
 
-Copia i due file (`organize_downloads.sh` e `install.sh`) in una cartella a tua scelta.
+Copy the two files (`organize_downloads.sh` and `install.sh`) to a folder of your choice.
 
-Se li hai ricevuti come archivio `.zip`, fai doppio click per estrarre.
+If you received them as a `.zip` archive, double-click to extract.
 
-### Passo 3: Apri il Terminale
+### Step 3: Open the Terminal
 
-1. Apri il **Finder**
-2. Vai in **Applicazioni** > **Utility**
-3. Fai doppio click su **Terminale**
+1. Open **Finder**
+2. Go to **Applications** > **Utilities**
+3. Double-click **Terminal**
 
-Oppure, metodo rapido:
-1. Premi `Cmd + Spazio` (apre Spotlight)
-2. Scrivi `Terminale` e premi Invio
+Or, quick method:
+1. Press `Cmd + Space` (opens Spotlight)
+2. Type `Terminal` and press Enter
 
-Si aprirà una finestra con del testo. Questo è il terminale.
+A window with text will open. This is the terminal.
 
-### Passo 4: Lancia l'installazione
+### Step 4: Run the installation
 
-1. Nella finestra del Terminale, spostati nella cartella dove hai messo i file. Digita il percorso corretto e premi Invio.
+1. In the Terminal window, navigate to the folder where you put the files. Type the correct path and press Enter.
 
-   Per esempio, se hai messo i file in Download:
+   For example, if you put the files in Downloads:
 
    ```bash
    cd ~/Downloads
    ```
 
-   Oppure, se li hai messi in una cartella specifica:
+   Or, if you put them in a specific folder:
 
    ```bash
    cd ~/Documents/download_organizer/macOS
    ```
 
-2. Rendi i file eseguibili:
+2. Make the files executable:
 
    ```bash
    chmod +x organize_downloads.sh install.sh
    ```
 
-3. Avvia l'installazione:
+3. Run the installation:
 
    ```bash
    ./install.sh
    ```
 
-   **Se compare un errore** tipo "Operation not permitted", vedi la sezione "Permessi macOS" più avanti.
+   **If an error appears** like "Operation not permitted", see the "macOS permissions" section below.
 
-4. **Scegli la lingua**: lo script ti chiederà in quale lingua vuoi i nomi delle cartelle.
-   Le opzioni sono: Italiano, English, Español, Français, Deutsch, Português.
-   Premi il numero corrispondente e poi Invio. Se non scegli nulla, sarà Italiano.
+4. **Choose the language**: the script will ask which language you want for folder names.
+   Options are: Italiano, English, Español, Français, Deutsch, Português.
+   Press the corresponding number and then Enter. If you don't choose, it defaults to Italiano.
 
-5. Lo script farà queste cose in automatico:
-   - Copia il programma nella cartella `~/.local/bin/`
-   - Copia i file di lingua in `~/.local/share/download_organizer/lang/`
-   - Aggiunge la cartella al PATH (se necessario)
-   - Se rileva cartelle esistenti in un'altra lingua, ti chiede se vuoi rinominarle
-   - Fa un primo test di funzionamento
-   - Ti chiede: **"Vuoi che io configuri il cron job automaticamente?"**
+5. The script will automatically:
+   - Copy the program to the `~/.local/bin/` folder
+   - Copy language files to `~/.local/share/download_organizer/lang/`
+   - Add the folder to PATH (if needed)
+   - If it detects existing folders in another language, it asks if you want to rename them
+   - Run a first test
+   - Ask you: **"Do you want me to configure the cron job automatically?"**
 
-6. **Rispondi `s`** e premi Invio per attivare l'esecuzione automatica ogni 3 ore.
+6. **Answer `y`** and press Enter to activate automatic execution every 3 hours.
 
-Se tutto è andato bene, vedrai: `Installazione completata!`
+If everything went well, you'll see: `Installation completed!`
 
-### Passo 5: Configura i permessi macOS (importante!)
+### Step 5: Configure macOS permissions (important!)
 
-macOS ha un sistema di sicurezza che potrebbe impedire allo script di accedere alla cartella Download quando gira in automatico. Per risolvere:
+macOS has a security system that may prevent the script from accessing the Downloads folder when running automatically. To fix this:
 
-1. Apri **Impostazioni di Sistema** (l'icona dell'ingranaggio)
-2. Vai in **Privacy e Sicurezza** > **Accesso completo al disco**
-3. Clicca il lucchetto in basso a sinistra e inserisci la password
-4. Clicca il pulsante **+** per aggiungere un programma
-5. Premi `Cmd + Shift + G` e scrivi `/usr/sbin/cron`, poi premi Invio
-6. Seleziona `cron` e clicca "Apri"
-7. Assicurati che la spunta accanto a `cron` sia attiva
+1. Open **System Settings** (the gear icon)
+2. Go to **Privacy & Security** > **Full Disk Access**
+3. Click the lock at the bottom left and enter your password
+4. Click the **+** button to add a program
+5. Press `Cmd + Shift + G` and type `/usr/sbin/cron`, then press Enter
+6. Select `cron` and click "Open"
+7. Make sure the checkbox next to `cron` is enabled
 
-Questo permette al sistema cron (che esegue lo script ogni 3 ore) di accedere alla cartella Download.
+This allows the cron system (which runs the script every 3 hours) to access the Downloads folder.
 
-### Passo 6: Verifica che tutto funzioni
+### Step 6: Verify everything works
 
-Apri il Terminale e digita:
+Open the Terminal and type:
 
 ```bash
 crontab -l
 ```
 
-Dovresti vedere una riga simile a questa:
+You should see a line similar to this:
 
 ```
-0 */3 * * * /Users/TUONOME/.local/bin/organize_downloads.sh >> /Users/TUONOME/.download_organizer.log 2>&1
+0 */3 * * * /Users/YOURNAME/.local/bin/organize_downloads.sh >> /Users/YOURNAME/.download_organizer.log 2>&1
 ```
 
-(Al posto di `TUONOME` ci sarà il tuo nome utente.)
+(Instead of `YOURNAME` you'll see your username.)
 
-Poi apri la cartella Download nel Finder: dovresti vedere le nuove sottocartelle numerate (`001__Recenti`, `002__Dati`, ecc.).
+Then open the Downloads folder in Finder: you should see the new numbered subfolders (`001__Recent`, `002__Data`, etc.).
 
-**Fatto!** Da questo momento lo script girerà automaticamente ogni 3 ore. Non devi fare altro.
+**Done!** From this moment the script will run automatically every 3 hours. You don't need to do anything else.
 
 ---
 
-## Come usarlo dopo l'installazione
+## How to use it after installation
 
-### Uso normale
+### Normal use
 
-Non devi fare niente! Lo script lavora da solo in background. Continua a scaricare file come fai sempre: verranno organizzati automaticamente.
+You don't need to do anything! The script works on its own in the background. Keep downloading files as you always do: they'll be organized automatically.
 
-I file appena scaricati li trovi sempre in: `001__Recenti/Oggi/`
+Newly downloaded files are always found in: `001__Recent/Today/`
 
-### Eseguire lo script manualmente
+### Run the script manually
 
-Se vuoi organizzare subito i file senza aspettare le 3 ore:
+If you want to organize files right away without waiting 3 hours:
 
 ```bash
 ~/.local/bin/organize_downloads.sh
 ```
 
-### Fare un test senza spostare nulla
+### Do a test without moving anything
 
-Se vuoi vedere cosa farebbe lo script senza toccare i file:
+If you want to see what the script would do without touching files:
 
-1. Apri il Terminale e digita:
+1. Open the Terminal and type:
    ```bash
    nano ~/.local/bin/organize_downloads.sh
    ```
-2. Cerca la riga `DRY_RUN=false` e cambiala in `DRY_RUN=true`
-3. Salva (`Ctrl+O`, poi `Invio`, poi `Ctrl+X` per uscire)
-4. Esegui lo script: vedrai cosa sposterebbe, senza spostare nulla
-5. **Ricordati di rimettere `DRY_RUN=false`** quando hai finito il test
+2. Find the line `DRY_RUN=false` and change it to `DRY_RUN=true`
+3. Save (`Ctrl+O`, then `Enter`, then `Ctrl+X` to exit)
+4. Run the script: you'll see what it would move, without moving anything
+5. **Remember to change back to `DRY_RUN=false`** when you're done testing
 
-### Vedere cosa ha fatto lo script
+### See what the script has done
 
-Per controllare il registro delle operazioni:
+To check the operations log:
 
 ```bash
 tail -n 50 ~/.download_organizer.log
 ```
 
-Questo mostra le ultime 50 righe del log, dove sono elencati tutti i file spostati.
+This shows the last 50 lines of the log, where all moved files are listed.
 
 ---
 
-## Disattivazione e rimozione
+## Deactivation and removal
 
-### Disattivare temporaneamente
+### Temporarily disable
 
-Se vuoi mettere in pausa lo script senza rimuoverlo:
+If you want to pause the script without removing it:
 
-1. Apri il Terminale e digita:
+1. Open the Terminal and type:
    ```bash
    crontab -e
    ```
-2. Si apre un editor di testo. Cerca la riga che contiene `organize_downloads.sh`
-3. Aggiungi il simbolo `#` all'inizio della riga (senza spazi prima):
+2. A text editor will open. Find the line containing `organize_downloads.sh`
+3. Add the `#` symbol at the beginning of the line (no spaces before):
    ```
-   #0 */3 * * * /Users/TUONOME/.local/bin/organize_downloads.sh >> ...
+   #0 */3 * * * /Users/YOURNAME/.local/bin/organize_downloads.sh >> ...
    ```
-4. Salva e chiudi. Lo script non girerà più fino a quando non rimuovi il `#`.
+4. Save and close. The script won't run until you remove the `#`.
 
-### Riattivare
+### Reactivate
 
-Stessa procedura: apri `crontab -e`, togli il `#` dalla riga, salva e chiudi.
+Same procedure: open `crontab -e`, remove the `#` from the line, save and close.
 
-### Rimuovere completamente
+### Remove completely
 
-1. Rimuovi il cron job:
+1. Remove the cron job:
    ```bash
    crontab -e
    ```
-   Cancella la riga con `organize_downloads.sh`, salva e chiudi.
+   Delete the line with `organize_downloads.sh`, save and close.
 
-2. Cancella lo script installato:
+2. Delete the installed script:
    ```bash
    rm ~/.local/bin/organize_downloads.sh
    ```
 
-3. (Opzionale) Cancella il file di log:
+3. (Optional) Delete the log file:
    ```bash
    rm ~/.download_organizer.log
    ```
 
-Le cartelle create nella cartella Download restano: puoi riorganizzarle come preferisci.
+The folders created in the Downloads folder remain: you can reorganize them as you prefer.
 
 ---
 
-## Risoluzione problemi
+## Troubleshooting
 
-### Errore "Operation not permitted"
+### "Operation not permitted" error
 
-macOS blocca l'accesso alla cartella Download per motivi di sicurezza. Segui il Passo 5 dell'installazione per concedere l'accesso completo al disco a `cron`.
+macOS blocks access to the Downloads folder for security reasons. Follow Step 5 of the installation to grant Full Disk Access to `cron`.
 
-Se l'errore appare quando esegui lo script manualmente dal Terminale:
-1. Vai in **Impostazioni di Sistema** > **Privacy e Sicurezza** > **Accesso completo al disco**
-2. Aggiungi **Terminale** (Terminal.app) alla lista
+If the error appears when you manually run the script from the Terminal:
+1. Go to **System Settings** > **Privacy & Security** > **Full Disk Access**
+2. Add **Terminal** (Terminal.app) to the list
 
-### Lo script non parte automaticamente
+### The script doesn't start automatically
 
-1. Verifica che il cron job sia attivo:
+1. Verify that the cron job is active:
    ```bash
    crontab -l
    ```
-   Se non vedi nessuna riga con `organize_downloads.sh`, ripeti il Passo 4 dell'installazione.
+   If you don't see any line with `organize_downloads.sh`, repeat Step 4 of the installation.
 
-2. Verifica i permessi del file:
+2. Verify file permissions:
    ```bash
    ls -la ~/.local/bin/organize_downloads.sh
    ```
-   Deve mostrare `rwx` (eseguibile). Se non lo è, esegui:
+   It should show `rwx` (executable). If it doesn't, run:
    ```bash
    chmod +x ~/.local/bin/organize_downloads.sh
    ```
 
-3. Verifica che `cron` abbia l'Accesso completo al disco (Passo 5).
+3. Verify that `cron` has Full Disk Access (Step 5).
 
-### I file non vengono spostati
+### Files are not being moved
 
-1. Controlla il log per capire cosa succede:
+1. Check the log to understand what's happening:
    ```bash
    tail -n 50 ~/.download_organizer.log
    ```
 
-2. Verifica che il percorso nello script sia corretto:
+2. Verify that the path in the script is correct:
    ```bash
    head -15 ~/.local/bin/organize_downloads.sh
    ```
-   Controlla la riga `DOWNLOAD_DIR=` e assicurati che corrisponda al nome reale della tua cartella.
+   Check the `DOWNLOAD_DIR=` line and make sure it matches the real name of your folder.
 
-### I file duplicati
+### Duplicate files
 
-Se scarichi un file con lo stesso nome di uno già presente, lo script aggiunge un numero progressivo:
-- `documento.pdf` (già esistente) → il nuovo diventa `documento_1.pdf`
+If you download a file with the same name as one that already exists, the script adds a sequential number:
+- `document.pdf` (already exists) -> the new one becomes `document_1.pdf`
 
-Nessun file viene mai sovrascritto.
-
----
-
-## Domande frequenti
-
-**I file vengono cancellati?**
-No. I file vengono solo spostati in sottocartelle. L'unica eccezione è la cartella `008__Temporaneo/`: i file con estensione sconosciuta che restano lì per oltre 30 giorni vengono eliminati.
-
-**Posso spostare i file manualmente tra le cartelle?**
-Sì, puoi spostare file come preferisci. Lo script non tocca i file che sono già dentro le sottocartelle.
-
-**Lo script rallenta il Mac?**
-No. Gira per pochi secondi ogni 3 ore e non consuma risorse.
-
-**Funziona se il Mac è in stop o spento?**
-No. Lo script gira solo quando il Mac è acceso e non in stop. Quando lo riaccendi, si attiverà alla prossima ora prevista (ogni 3 ore: alle 0, 3, 6, 9, 12, 15, 18, 21).
-
-**Posso cambiare la frequenza?**
-Sì. Apri `crontab -e` e modifica la riga. Alcuni esempi:
-- Ogni ora: `0 * * * *`
-- Ogni 6 ore: `0 */6 * * *`
-- Una volta al giorno a mezzanotte: `0 0 * * *`
-
-**I download in corso vengono toccati?**
-No. I file con estensione `.part`, `.crdownload` o `.download` (download non completati) vengono ignorati.
-
-**Devo tenere il Terminale aperto?**
-No. Il cron job gira in background indipendentemente dal Terminale. Una volta configurato, puoi chiudere il Terminale.
-
-**Come cambio lingua dopo l'installazione?**
-Riesegui `./install.sh` dalla cartella originale e scegli una nuova lingua. Lo script rileva le cartelle esistenti nella lingua precedente e ti chiede se vuoi rinominarle automaticamente.
+No file is ever overwritten.
 
 ---
 
-## Contenuto della cartella
+## Frequently asked questions
 
-| File | Descrizione |
+**Are files deleted?**
+No. Files are only moved into subfolders. The only exception is the `008__Temporary/` folder: files with unknown extensions that remain there for over 30 days are deleted.
+
+**Can I manually move files between folders?**
+Yes, you can move files as you like. The script doesn't touch files that are already inside the subfolders.
+
+**Does the script slow down the Mac?**
+No. It runs for a few seconds every 3 hours and doesn't consume resources.
+
+**Does it work if the Mac is asleep or off?**
+No. The script only runs when the Mac is on and not asleep. When you wake it, it will activate at the next scheduled time (every 3 hours: at 0, 3, 6, 9, 12, 15, 18, 21).
+
+**Can I change the frequency?**
+Yes. Open `crontab -e` and modify the line. Some examples:
+- Every hour: `0 * * * *`
+- Every 6 hours: `0 */6 * * *`
+- Once a day at midnight: `0 0 * * *`
+
+**Are in-progress downloads touched?**
+No. Files with `.part`, `.crdownload` or `.download` extension (incomplete downloads) are ignored.
+
+**Do I need to keep the Terminal open?**
+No. The cron job runs in the background independently of the Terminal. Once configured, you can close the Terminal.
+
+**How do I change language after installation?**
+Re-run `./install.sh` from the original folder and choose a new language. The script detects existing folders in the previous language and asks if you want to rename them automatically.
+
+---
+
+## Folder contents
+
+| File | Description |
 |------|-------------|
-| `organize_downloads.sh` | Lo script principale che organizza i file |
-| `install.sh` | Lo script di installazione (da eseguire una sola volta) |
-| `lang/it.sh` ... `lang/pt.sh` | File di lingua (6 lingue supportate) |
-| `README.md` | Questa guida (italiano) |
-| `README.en.md` | Questa guida (inglese) |
-
+| `organize_downloads.sh` | The main script that organizes files |
+| `install.sh` | The installation script (run once only) |
+| `lang/it.sh` ... `lang/pt.sh` | Language files (6 languages supported) |
+| `README.md` | This guide (English) |
+| `README.it.md` | This guide (Italian) |

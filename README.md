@@ -1,124 +1,124 @@
-**🇮🇹 [Italiano](README.md) | 🇬🇧 [English](README.en.md)**
+**🇬🇧 [English](README.md) | 🇮🇹 [Italiano](README.it.md) | 📄 [License](LICENSE.md)**
 
 ---
 
 # Download Organizer
 
-Organizzatore automatico della cartella Download per **Linux**, **macOS** e **Windows**.
+Automatic Download folder organizer for **Linux**, **macOS** and **Windows**.
 
-Lo script gira in background ogni 3 ore e ordina i file scaricati in sottocartelle organizzate per tipo, senza bisogno di intervento manuale.
-
----
-
-## Come funziona
-
-Ogni 3 ore lo script esegue automaticamente queste operazioni:
-
-1. **Prende i nuovi file** dalla cartella Download e li mette in `001__Recenti/Oggi/`
-2. **Dopo 1 giorno**, li sposta in `001__Recenti/Questa-Settimana/`
-3. **Dopo 7 giorni**, li smista nella cartella giusta in base al tipo (PDF, immagini, video, ecc.)
-4. **Dopo 30 giorni**, elimina i file sconosciuti rimasti in `008__Temporaneo/`
-
-In pratica: hai **7 giorni** per trovare i file recenti nella cartella `001__Recenti/`, poi vengono archiviati automaticamente nella categoria corretta.
+The script runs in the background every 3 hours and sorts downloaded files into organized subfolders by type, with no manual intervention needed.
 
 ---
 
-## Struttura delle cartelle
+## How it works
 
-Dopo l'installazione, la cartella Download viene organizzata così:
+Every 3 hours the script automatically performs these operations:
+
+1. **Takes new files** from the Download folder and puts them in `001__Recent/Today/`
+2. **After 1 day**, moves them to `001__Recent/This-Week/`
+3. **After 7 days**, sorts them into the right folder based on type (PDF, images, video, etc.)
+4. **After 30 days**, deletes unknown files left in `008__Temporary/`
+
+In practice: you have **7 days** to find recent files in `001__Recent/`, then they are automatically archived into the correct category.
+
+---
+
+## Folder structure
+
+After installation, the Download folder is organized like this:
 
 ```
-Download/
-├── 001__Recenti/
-│   ├── Oggi/                    ← file scaricati nelle ultime 24 ore
-│   └── Questa-Settimana/        ← file da 1 a 7 giorni
+Downloads/
+├── 001__Recent/
+│   ├── Today/                     ← files downloaded in the last 24 hours
+│   └── This-Week/                 ← files from 1 to 7 days old
 │
-├── 002__Dati/
-│   ├── CSV/                     ← .csv, .tsv
-│   ├── Excel/                   ← .xlsx, .xls, .ods
-│   ├── JSON/                    ← .jsonl, .ndjson
-│   ├── Database/                ← .sql, .db, .sqlite
-│   ├── Parquet/                 ← .parquet, .feather, .arrow
-│   └── Altri-Formati/           ← .xml, .avro, .hdf5
+├── 002__Data/
+│   ├── CSV/                       ← .csv, .tsv
+│   ├── Excel/                     ← .xlsx, .xls, .ods
+│   ├── JSON/                      ← .jsonl, .ndjson
+│   ├── Database/                  ← .sql, .db, .sqlite
+│   ├── Parquet/                   ← .parquet, .feather, .arrow
+│   └── Other-Formats/             ← .xml, .avro, .hdf5
 │
-├── 003__Documenti/
-│   ├── PDF/                     ← .pdf
-│   ├── Word/                    ← .doc, .docx, .odt
-│   ├── Presentazioni/           ← .ppt, .pptx, .odp, .key
-│   ├── Testo/                   ← .txt, .md
-│   └── Ebook/                   ← .epub, .mobi
+├── 003__Documents/
+│   ├── PDF/                       ← .pdf
+│   ├── Word/                      ← .doc, .docx, .odt
+│   ├── Presentations/             ← .ppt, .pptx, .odp, .key
+│   ├── Text/                      ← .txt, .md
+│   └── Ebook/                     ← .epub, .mobi
 │
 ├── 004__Media/
-│   ├── Immagini/                ← .jpg, .png, .gif, .svg, .webp, .heic
-│   ├── Video/                   ← .mp4, .avi, .mkv, .mov
-│   ├── Audio/                   ← .mp3, .wav, .flac, .ogg
-│   └── Diagrammi/               ← .drawio, .puml
+│   ├── Images/                    ← .jpg, .png, .gif, .svg, .webp, .heic
+│   ├── Video/                     ← .mp4, .avi, .mkv, .mov
+│   ├── Audio/                     ← .mp3, .wav, .flac, .ogg
+│   └── Diagrams/                  ← .drawio, .puml
 │
-├── 005__Sviluppo/
-│   ├── Codice/                  ← .py, .js, .ts, .java, .cpp, .swift
-│   ├── Notebooks/               ← .ipynb
-│   ├── Config/                  ← .json, .yaml, .toml, .env
-│   ├── Repository/              ← .zip/.tar.gz con nomi tipo "v1.0", "main"
-│   └── Package/                 ← .whl, .jar, .deb, .rpm
+├── 005__Development/
+│   ├── Code/                      ← .py, .js, .ts, .java, .cpp, .swift
+│   ├── Notebooks/                 ← .ipynb
+│   ├── Config/                    ← .json, .yaml, .toml, .env
+│   ├── Repository/                ← .zip/.tar.gz with names like "v1.0", "main"
+│   └── Package/                   ← .whl, .jar, .deb, .rpm
 │
 ├── 006__Software/
-│   ├── Installatori/            ← formati specifici per ogni OS (vedi sotto)
-│   ├── Archivi/                 ← .zip, .rar, .7z, .tar.gz
-│   ├── Docker/                  ← Dockerfile, docker-compose.yml
-│   └── Scripts/                 ← .sh, .bat, .ps1
+│   ├── Installers/                ← OS-specific formats (see below)
+│   ├── Archives/                  ← .zip, .rar, .7z, .tar.gz
+│   ├── Docker/                    ← Dockerfile, docker-compose.yml
+│   └── Scripts/                   ← .sh, .bat, .ps1
 │
-├── 007__Lavoro/
-│   ├── Fatture/                 ← file con "fattura" o "invoice" nel nome
-│   ├── Contratti/               ← file con "contratto" o "contract" nel nome
-│   ├── Preventivi/              ← file con "preventivo" o "quote" nel nome
-│   └── Altri-Documenti/
+├── 007__Work/
+│   ├── Invoices/                  ← files with "invoice" or "receipt" in the name
+│   ├── Contracts/                 ← files with "contract" or "agreement" in the name
+│   ├── Quotes/                    ← files with "quote" or "estimate" in the name
+│   └── Other-Documents/
 │
-└── 008__Temporaneo/             ← file con estensione sconosciuta
-                                    (eliminati automaticamente dopo 30 giorni)
+└── 008__Temporary/                ← files with unknown extension
+                                      (automatically deleted after 30 days)
 ```
 
-Le cartelle sono numerate (`001__`, `002__`, ecc.) per apparire sempre nello stesso ordine nel file manager.
+Folders are numbered (`001__`, `002__`, etc.) to always appear in the same order in the file manager.
 
 ---
 
-## Caratteristiche principali
+## Key features
 
-- **Supporto multi-lingua**: i nomi delle cartelle, i messaggi e le keyword di riconoscimento si adattano alla lingua scelta durante l'installazione (Italiano, English, Español, Français, Deutsch, Português)
-- **Nessun file viene sovrascritto**: se esiste già un file con lo stesso nome, viene aggiunto un suffisso numerico (`documento_1.pdf`, `documento_2.pdf`, ecc.)
-- **I download in corso non vengono toccati**: i file `.part`, `.crdownload` e `.download` vengono ignorati
-- **Documenti di lavoro riconosciuti automaticamente**: fatture, contratti e preventivi vengono identificati dal nome del file e smistati in `007__Lavoro/` (le keyword cambiano in base alla lingua scelta)
-- **Modalità test (DRY RUN)**: è possibile vedere cosa farebbe lo script senza spostare nulla
-- **Log dettagliato**: ogni operazione viene registrata in un file di log per consultazione
-- **Migrazione cartelle**: se cambi lingua reinstallando, le cartelle esistenti vengono rinominate automaticamente
+- **Multi-language support**: folder names, messages and recognition keywords adapt to the language chosen during installation (Italiano, English, Español, Français, Deutsch, Português)
+- **No files are overwritten**: if a file with the same name already exists, a numeric suffix is added (`document_1.pdf`, `document_2.pdf`, etc.)
+- **In-progress downloads are not touched**: `.part`, `.crdownload` and `.download` files are ignored
+- **Work documents recognized automatically**: invoices, contracts and quotes are identified by filename and sorted into `007__Work/` (keywords change based on the chosen language)
+- **Test mode (DRY RUN)**: you can see what the script would do without moving anything
+- **Detailed log**: every operation is recorded in a log file for reference
+- **Folder migration**: if you change language by reinstalling, existing folders are automatically renamed
 
 ---
 
-## Installazione
+## Installation
 
-### Scegli la versione per il tuo sistema operativo
+### Choose the version for your operating system
 
-Ogni cartella contiene gli script e una guida passo passo pensata per utenti non tecnici.
+Each folder contains the scripts and a step-by-step guide designed for non-technical users.
 
-| Sistema operativo | Cartella | Script principale | Guida |
-|-------------------|----------|-------------------|-------|
-| **Linux** (Ubuntu, Fedora, Debian, Mint, ecc.) | [`linux/`](linux/) | `organize_downloads.sh` (bash) | [`linux/README.md`](linux/README.md) |
-| **macOS** (10.15 Catalina o successivo) | [`macOS/`](macOS/) | `organize_downloads.sh` (bash) | [`macOS/README.md`](macOS/README.md) |
-| **Windows** (10 e 11) | [`windows/`](windows/) | `Organize-Downloads.ps1` (PowerShell) | [`windows/README.md`](windows/README.md) |
+| Operating system | Folder | Main script | Guide |
+|-----------------|--------|-------------|-------|
+| **Linux** (Ubuntu, Fedora, Debian, Mint, etc.) | [`linux/`](linux/) | `organize_downloads.sh` (bash) | [`linux/README.md`](linux/README.md) |
+| **macOS** (10.15 Catalina or later) | [`macOS/`](macOS/) | `organize_downloads.sh` (bash) | [`macOS/README.md`](macOS/README.md) |
+| **Windows** (10 and 11) | [`windows/`](windows/) | `Organize-Downloads.ps1` (PowerShell) | [`windows/README.md`](windows/README.md) |
 
-### Procedura rapida
+### Quick procedure
 
-1. **Scarica** i file della cartella corrispondente al tuo sistema operativo
-2. **Apri la guida** (`README.md`) dentro quella cartella e segui le istruzioni passo passo
-3. **Lancia lo script di installazione** (`install.sh` su Linux/macOS, `Install-Windows.ps1` su Windows)
-4. **Scegli la lingua** quando richiesto (Italiano, English, Español, Français, Deutsch, Português)
-5. **Conferma** l'attivazione automatica quando richiesto
+1. **Download** the files from the folder corresponding to your operating system
+2. **Open the guide** (`README.md`) inside that folder and follow the step-by-step instructions
+3. **Run the installation script** (`install.sh` on Linux/macOS, `Install-Windows.ps1` on Windows)
+4. **Choose the language** when prompted (Italiano, English, Español, Français, Deutsch, Português)
+5. **Confirm** automatic activation when prompted
 
-L'installazione richiede pochi minuti. Dopo, lo script gira da solo in background senza bisogno di ulteriori interventi.
+Installation takes a few minutes. Afterwards, the script runs on its own in the background with no further action needed.
 
-### Lingue supportate
+### Supported languages
 
-| Codice | Lingua | Esempio cartella |
-|--------|--------|-----------------|
+| Code | Language | Folder example |
+|------|----------|---------------|
 | `it` | Italiano (default) | `001__Recenti/Oggi` |
 | `en` | English | `001__Recent/Today` |
 | `es` | Español | `001__Recientes/Hoy` |
@@ -126,81 +126,82 @@ L'installazione richiede pochi minuti. Dopo, lo script gira da solo in backgroun
 | `de` | Deutsch | `001__Neueste/Heute` |
 | `pt` | Português | `001__Recentes/Hoje` |
 
-Per cambiare lingua dopo l'installazione, basta rieseguire lo script di installazione e scegliere una nuova lingua. Le cartelle esistenti vengono rinominate automaticamente.
+To change language after installation, simply re-run the installation script and choose a new language. Existing folders are automatically renamed.
 
 ---
 
-## Differenze tra le versioni
+## Differences between versions
 
-Le tre versioni sono funzionalmente identiche: stessa struttura di cartelle, stessa logica di categorizzazione, stesso comportamento. Le differenze riguardano solo l'adattamento al sistema operativo.
+The three versions are functionally identical: same folder structure, same categorization logic, same behavior. The differences only concern OS-specific adaptation.
 
 ### Linux
 
-- **Linguaggio**: Bash
-- **Automazione**: cron job (`crontab`)
-- **Installatori riconosciuti**: `.appimage`, `.deb`, `.snap`, `.flatpak`
-- **Percorso predefinito**: `$HOME/Download` (da modificare se la cartella ha un nome diverso, ad esempio `Scaricati` o `Downloads`)
+- **Language**: Bash
+- **Automation**: cron job (`crontab`)
+- **Recognized installers**: `.appimage`, `.deb`, `.snap`, `.flatpak`
+- **Default path**: `$HOME/Download` (change if your folder has a different name, e.g. `Scaricati` or `Downloads`)
 
 ### macOS
 
-- **Linguaggio**: Bash (compatibile con bash 3.2+)
-- **Automazione**: cron job (`crontab`)
-- **Installatori riconosciuti**: `.dmg`, `.pkg`, `.app`
-- **Percorso predefinito**: `$HOME/Downloads`
-- **Nota importante**: è necessario concedere l'**Accesso completo al disco** a `cron` nelle Impostazioni di Sistema, altrimenti lo script non potrà accedere alla cartella Download quando gira in automatico. La guida spiega come fare.
+- **Language**: Bash (compatible with bash 3.2+)
+- **Automation**: cron job (`crontab`)
+- **Recognized installers**: `.dmg`, `.pkg`, `.app`
+- **Default path**: `$HOME/Downloads`
+- **Important note**: you need to grant **Full Disk Access** to `cron` in System Settings, otherwise the script won't be able to access the Download folder when running automatically. The guide explains how.
 
 ### Windows
 
-- **Linguaggio**: PowerShell
-- **Automazione**: Utilità di pianificazione (Task Scheduler)
-- **Installatori riconosciuti**: `.exe`, `.msi`, `.appx`, `.msix`
-- **Percorso predefinito**: `$env:USERPROFILE\Downloads`
-- **Nota**: potrebbe essere necessario abilitare l'esecuzione degli script PowerShell. La guida spiega come fare.
+- **Language**: PowerShell
+- **Automation**: Task Scheduler
+- **Recognized installers**: `.exe`, `.msi`, `.appx`, `.msix`
+- **Default path**: `$env:USERPROFILE\Downloads`
+- **Note**: you may need to enable PowerShell script execution. The guide explains how.
 
 ---
 
-## Domande frequenti
+## Frequently asked questions
 
-**I file vengono cancellati?**
-No. I file vengono solo spostati in sottocartelle. L'unica eccezione è la cartella `008__Temporaneo/`: i file con estensione sconosciuta che restano lì per oltre 30 giorni vengono eliminati.
+**Are files deleted?**
+No. Files are only moved into subfolders. The only exception is the `008__Temporary/` folder: files with unknown extensions that remain there for over 30 days are deleted.
 
-**Posso spostare i file manualmente tra le cartelle?**
-Sì, puoi spostare file come preferisci. Lo script non tocca i file che sono già dentro le sottocartelle.
+**Can I manually move files between folders?**
+Yes, you can move files as you like. The script doesn't touch files that are already inside the subfolders.
 
-**Lo script rallenta il computer?**
-No. Gira per pochi secondi ogni 3 ore e non consuma risorse.
+**Does the script slow down the computer?**
+No. It runs for a few seconds every 3 hours and doesn't consume resources.
 
-**Posso cambiare la frequenza di esecuzione?**
-Sì. Ogni guida specifica spiega come modificare l'intervallo (ogni ora, ogni 6 ore, una volta al giorno, ecc.).
+**Can I change the execution frequency?**
+Yes. Each specific guide explains how to modify the interval (every hour, every 6 hours, once a day, etc.).
 
-**Posso usarlo su più sistemi operativi contemporaneamente?**
-Sì. Ogni versione è indipendente e può essere installata separatamente su ciascun computer.
+**Can I use it on multiple operating systems at the same time?**
+Yes. Each version is independent and can be installed separately on each computer.
 
 ---
 
-## Contenuto del repository
+## Repository contents
 
 ```
 download_organizer/
-├── README.md                        ← questa guida generale (italiano)
-├── README.en.md                     ← questa guida generale (inglese)
+├── README.md                        ← general guide (English)
+├── README.it.md                     ← general guide (Italian)
+├── LICENSE.md                       ← MIT license
 ├── .gitignore
 ├── linux/
-│   ├── organize_downloads.sh        ← script principale (bash)
-│   ├── install.sh                   ← installazione automatica
-│   ├── lang/                        ← file di lingua (it, en, es, fr, de, pt)
-│   ├── README.md                    ← guida passo passo per Linux (italiano)
-│   └── README.en.md                 ← guida passo passo per Linux (inglese)
+│   ├── organize_downloads.sh        ← main script (bash)
+│   ├── install.sh                   ← automatic installation
+│   ├── lang/                        ← language files (it, en, es, fr, de, pt)
+│   ├── README.md                    ← step-by-step guide for Linux (English)
+│   └── README.it.md                 ← step-by-step guide for Linux (Italian)
 ├── macOS/
-│   ├── organize_downloads.sh        ← script principale (bash)
-│   ├── install.sh                   ← installazione automatica
-│   ├── lang/                        ← file di lingua (it, en, es, fr, de, pt)
-│   ├── README.md                    ← guida passo passo per macOS (italiano)
-│   └── README.en.md                 ← guida passo passo per macOS (inglese)
+│   ├── organize_downloads.sh        ← main script (bash)
+│   ├── install.sh                   ← automatic installation
+│   ├── lang/                        ← language files (it, en, es, fr, de, pt)
+│   ├── README.md                    ← step-by-step guide for macOS (English)
+│   └── README.it.md                 ← step-by-step guide for macOS (Italian)
 └── windows/
-    ├── Organize-Downloads.ps1       ← script principale (PowerShell)
-    ├── Install-Windows.ps1          ← installazione automatica
-    ├── lang/                        ← file di lingua (it, en, es, fr, de, pt)
-    ├── README.md                    ← guida passo passo per Windows (italiano)
-    └── README.en.md                 ← guida passo passo per Windows (inglese)
+    ├── Organize-Downloads.ps1       ← main script (PowerShell)
+    ├── Install-Windows.ps1          ← automatic installation
+    ├── lang/                        ← language files (it, en, es, fr, de, pt)
+    ├── README.md                    ← step-by-step guide for Windows (English)
+    └── README.it.md                 ← step-by-step guide for Windows (Italian)
 ```
