@@ -1,4 +1,4 @@
-**🇬🇧 [English](README.md) | 🇮🇹 [Italiano](README.it.md) | 📄 [License](LICENSE.md)**
+**🇬🇧 [English](README.md) | 🇮🇹 [Italiano](README.it.md) | 🔒 [Sicurezza](SECURITY.it.md) | 📄 [License](LICENSE.md)**
 
 ---
 
